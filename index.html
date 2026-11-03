@@ -1,36 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <style>
-    body {
-      margin: 0;
-      background: #0f172a;
-      color: white;
-      font-family: sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .text {
-      font-size: 120px;
-      font-weight: bold;
-      color: #38bdf8;
-      animation: bounce 2s infinite ease-in-out;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-50px); }
-    }
-  </style>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 720px; height: 1280px; overflow: hidden; }
+  body { font-family: 'DejaVu Sans', 'Noto Sans', sans-serif; }
+  #root { position: relative; width: 720px; height: 1280px; overflow: hidden; background: #faf3e6; }
+  .clip { position: absolute; inset: 0; }
+  .scene { position: absolute; inset: 0; display: flex; flex-direction: column;
+           align-items: center; justify-content: center; text-align: center; padding: 0 70px; }
+  .s-neutral  { background: radial-gradient(circle at 50% 22%, #fff8ea 0%, #faf3e6 55%, #f1e6cf 100%); }
+  .s-positive { background: radial-gradient(circle at 50% 22%, #fff6df 0%, #fdf0d3 60%, #f5e0b0 100%); }
+  .s-negative { background: radial-gradient(circle at 50% 22%, #f2f6f8 0%, #e9eff3 60%, #d9e2e9 100%); }
+  .s-compare  { background: linear-gradient(90deg, #e4ebf0 0%, #eef2f5 48%, #fdf0d3 52%, #faeccd 100%); }
+  .title { font-size: 64px; font-weight: 800; line-height: 1.28; color: #3e3026; margin-bottom: 26px; }
+  .t-positive { color: #006946; }
+  .t-negative { color: #b95c3e; }
+  .vs { color: #a06e1e; }
+  .sub { font-size: 38px; font-style: italic; color: #3e3026; opacity: 0.85; margin-bottom: 56px; }
+  .lines { display: flex; flex-direction: column; gap: 32px; margin-bottom: 24px; }
+  .line { display: flex; align-items: center; gap: 26px; font-size: 37px; color: #3e3026; text-align: left; }
+  .icon { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 30px; font-weight: 800; color: #ffffff; }
+  .i-pos::before { content: '\2713'; }
+  .i-neg::before { content: '\2717'; }
+  .i-mid::before { content: '\2022'; }
+  .i-pos { background: #006946; }
+  .i-neg { background: #b95c3e; }
+  .i-mid { background: #c99a2e; }
+  .punch { font-size: 54px; font-weight: 800; color: #a06e1e; margin-top: 46px; line-height: 1.32; }
+  .sign { font-size: 30px; font-style: italic; color: #3e3026; opacity: 0.8; margin-top: 64px; }
+</style>
 </head>
 <body>
-  <!-- Konfigurasi HyperFrames: Lebar 1280, Tinggi 720, Durasi 5 detik -->
-  <div id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1280" data-height="720">
-    <div class="clip" data-start="0" data-duration="5" data-track-index="1">
-      <div class="text">Halo GitHub!</div>
-    </div>
+<div id="root" data-composition-id="main" data-start="0" data-duration="30"
+     data-width="720" data-height="1280" data-fps="30">
+
+  <!-- Adegan 1 (0-5 dtk): Hook -->
+  <div id="s0" class="clip" data-start="0" data-duration="5" data-track-index="1">
+    <div class="scene s-neutral"><div class="scene-inner">
+      <div class="title a-title">RAJIN MINUM AIR <span class="vs">vs</span> JARANG MINUM</div>
+      <div class="sub a-sub">Sehari, kamu yang mana?</div>
+    </div></div>
   </div>
+
+  <!-- Adegan 2 (5-10 dtk): Sisi positif -->
+  <div id="s1" class="clip" data-start="5" data-duration="5" data-track-index="1">
+    <div class="scene s-positive"><div class="scene-inner">
+      <div class="title a-title t-positive">RAJIN MINUM AIR</div>
+      <div class="sub a-sub">2 liter sehari, rutin!</div>
+      <div class="lines">
+        <div class="line a-line"><span class="icon i-pos"></span>Badan tetap terhidrasi</div>
+        <div class="line a-line"><span class="icon i-pos"></span>Fokus dan pikiran segar</div>
+        <div class="line a-line"><span class="icon i-pos"></span>Kulit sehat, tidak lemas</div>
+      </div>
+      <div class="punch a-punch">AIR = BAHAN BAKAR TUBUH!</div>
+    </div></div>
+  </div>
+
+  <!-- Adegan 3 (10-15 dtk): Sisi negatif -->
+  <div id="s2" class="clip" data-start="10" data-duration="5" data-track-index="1">
+    <div class="scene s-negative"><div class="scene-inner">
+      <div class="title a-title t-negative">JARANG MINUM AIR</div>
+      <div class="sub a-sub">Minum cuma kalau haus</div>
+      <div class="lines">
+        <div class="line a-line"><span class="icon i-neg"></span>Kepala pusing dan berat</div>
+        <div class="line a-line"><span class="icon i-neg"></span>Gampang lelah dan ngantuk</div>
+        <div class="line a-line"><span class="icon i-neg"></span>Kulit kering, bibir pecah</div>
+      </div>
+      <div class="punch a-punch">KURANG AIR = TUBUH NGELUH!</div>
+    </div></div>
+  </div>
+
+  <!-- Adegan 4 (15-20 dtk): Bandingkan -->
+  <div id="s3" class="clip" data-start="15" data-duration="5" data-track-index="1">
+    <div class="scene s-compare"><div class="scene-inner">
+      <div class="title a-title">BANDINGKAN!</div>
+      <div class="lines">
+        <div class="line a-line"><span class="icon i-mid"></span>1 botol di meja vs lupa minum</div>
+        <div class="line a-line"><span class="icon i-mid"></span>Air gratis vs obat sakit kepala</div>
+      </div>
+      <div class="punch a-punch">Sehari 1 botol, badan berterima kasih!</div>
+    </div></div>
+  </div>
+
+  <!-- Adegan 5 (20-25 dtk): CTA -->
+  <div id="s4" class="clip" data-start="20" data-duration="5" data-track-index="1">
+    <div class="scene s-positive"><div class="scene-inner">
+      <div class="title a-title t-positive">TARUH BOTOL DI MEJAMU!</div>
+      <div class="sub a-sub">600 ml, isi ulang 2x, beres.</div>
+      <div class="lines">
+        <div class="line a-line"><span class="icon i-pos"></span>Taruh di meja kerja / belajar</div>
+        <div class="line a-line"><span class="icon i-pos"></span>Habiskan sebelum sore hari</div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Adegan 6 (25-30 dtk): Penutup -->
+  <div id="s5" class="clip" data-start="25" data-duration="5" data-track-index="1">
+    <div class="scene s-neutral"><div class="scene-inner">
+      <div class="title a-title">Kamu tim yang mana?</div>
+      <div class="sub a-sub">Tulis di komentar + Follow</div>
+      <div class="sign a-punch">Pak Guru Digital</div>
+    </div></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+</div>
+
+<script>
+  window.__timelines = window.__timelines || {};
+  var tl = gsap.timeline({ paused: true });
+  for (var i = 0; i < 6; i++) {
+    (function (i) {
+      var t = i * 5, s = '#s' + i;
+      tl.from(s + ' .a-title', { opacity: 0, y: 50, duration: 0.7, ease: 'power2.out' }, t);
+      tl.from(s + ' .a-sub',   { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' }, t + 0.5);
+      tl.from(s + ' .a-line',  { opacity: 0, x: -40, duration: 0.5, stagger: 0.45, ease: 'power2.out' }, t + 1.0);
+      tl.from(s + ' .a-punch', { opacity: 0, scale: 0.92, duration: 0.6, ease: 'back.out(1.5)' }, t + 3.4);
+      tl.to(s + ' .scene-inner', { opacity: 0, duration: 0.5, ease: 'power1.in' }, t + 4.5);
+    })(i);
+  }
+  window.__timelines['main'] = tl;
+</script>
 </body>
 </html>
