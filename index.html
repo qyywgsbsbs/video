@@ -3,127 +3,316 @@
 <head>
 <meta charset="UTF-8">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 720px; height: 1280px; overflow: hidden; }
-  body { font-family: 'DejaVu Sans', 'Noto Sans', sans-serif; }
-  #root { position: relative; width: 720px; height: 1280px; overflow: hidden; background: #faf3e6; }
-  .clip { position: absolute; inset: 0; }
-  .scene { position: absolute; inset: 0; display: flex; flex-direction: column;
-           align-items: center; justify-content: center; text-align: center; padding: 0 70px; }
-  .s-neutral  { background: radial-gradient(circle at 50% 22%, #fff8ea 0%, #faf3e6 55%, #f1e6cf 100%); }
-  .s-positive { background: radial-gradient(circle at 50% 22%, #fff6df 0%, #fdf0d3 60%, #f5e0b0 100%); }
-  .s-negative { background: radial-gradient(circle at 50% 22%, #f2f6f8 0%, #e9eff3 60%, #d9e2e9 100%); }
-  .s-compare  { background: linear-gradient(90deg, #e4ebf0 0%, #eef2f5 48%, #fdf0d3 52%, #faeccd 100%); }
-  .title { font-size: 64px; font-weight: 800; line-height: 1.28; color: #3e3026; margin-bottom: 26px; }
-  .t-positive { color: #006946; }
-  .t-negative { color: #b95c3e; }
-  .vs { color: #a06e1e; }
-  .sub { font-size: 38px; font-style: italic; color: #3e3026; opacity: 0.85; margin-bottom: 56px; }
-  .lines { display: flex; flex-direction: column; gap: 32px; margin-bottom: 24px; }
-  .line { display: flex; align-items: center; gap: 26px; font-size: 37px; color: #3e3026; text-align: left; }
-  .icon { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 30px; font-weight: 800; color: #ffffff; }
-  .i-pos::before { content: '\2713'; }
-  .i-neg::before { content: '\2717'; }
-  .i-mid::before { content: '\2022'; }
-  .i-pos { background: #006946; }
-  .i-neg { background: #b95c3e; }
-  .i-mid { background: #c99a2e; }
-  .punch { font-size: 54px; font-weight: 800; color: #a06e1e; margin-top: 46px; line-height: 1.32; }
-  .sign { font-size: 30px; font-style: italic; color: #3e3026; opacity: 0.8; margin-top: 64px; }
+html, body { width: 720px; height: 1280px; overflow: hidden; margin: 0; padding: 0; background: #f5ead6; }
+#root { position: relative; width: 720px; height: 1280px; overflow: hidden; font-family: 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif; }
+.clip { position: absolute; inset: 0; }
+.clay { box-shadow: 0 10px 24px rgba(107,79,58,.25); }
+.caption {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 660px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.35;
+  color: #3e3026;
+  background: rgba(245,234,214,0.95);
+  padding: 20px 24px;
+  border-radius: 28px;
+  box-shadow: 0 10px 24px rgba(107,79,58,.28);
+  z-index: 200;
+  letter-spacing: -0.3px;
+}
+.caption span { opacity: 0; display: inline-block; margin: 0 4px; }
+#post3, #pivot3, #beam3, #stone3, #rope3, #bucket3, #water3 { opacity: 0; }
+#sun8 { opacity: 0; }
+.plant { transform: scaleY(0); transform-origin: bottom center; }
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="30"
-     data-width="720" data-height="1280" data-fps="30">
+<div id="root" data-composition-id="main" data-start="0" data-duration="74" data-width="720" data-height="1280" data-fps="30">
 
-  <!-- Adegan 1 (0-5 dtk): Hook -->
-  <div id="s0" class="clip" data-start="0" data-duration="5" data-track-index="1">
-    <div class="scene s-neutral"><div class="scene-inner">
-      <div class="title a-title">RAJIN MINUM AIR <span class="vs">vs</span> JARANG MINUM</div>
-      <div class="sub a-sub">Sehari, kamu yang mana?</div>
-    </div></div>
+  <!-- ============ SCENE 1: HOOK (0-9s) ============ -->
+  <div class="clip" data-start="0" data-duration="9" data-track-index="1" id="s1">
+    <div style="position:absolute; inset:0; background:#f5ead6;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1020px; height:260px; background:#c96f4a; border-radius:60px 60px 0 0;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1120px; height:160px; background:#7fa6b8;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1000px; height:50px; background:#8a9b6e; border-radius:60px 60px 0 0;"></div>
+
+    <div id="farmer" style="position:absolute; left:320px; top:680px; width:160px; height:360px;">
+      <div class="clay" style="position:absolute; left:40px; top:0; width:80px; height:80px; background:#d9a441; border-radius:50%;"></div>
+      <div class="clay" style="position:absolute; left:20px; top:70px; width:120px; height:180px; background:#8a9b6e; border-radius:50px;"></div>
+      <div class="clay" style="position:absolute; left:20px; top:230px; width:34px; height:130px; background:#6b4f3a; border-radius:16px;"></div>
+      <div class="clay" style="position:absolute; left:106px; top:230px; width:34px; height:130px; background:#6b4f3a; border-radius:16px;"></div>
+      <div class="clay" style="position:absolute; left:-50px; top:90px; width:80px; height:28px; background:#8a9b6e; border-radius:14px; transform:rotate(-15deg); transform-origin:right center;"></div>
+      <div class="clay" style="position:absolute; left:130px; top:90px; width:80px; height:28px; background:#8a9b6e; border-radius:14px; transform:rotate(15deg); transform-origin:left center;"></div>
+    </div>
+
+    <div id="ember1" class="clay" style="position:absolute; left:120px; top:960px; width:120px; height:80px; background:#6b4f3a; border-radius:20px;"></div>
+    <div style="position:absolute; left:150px; top:920px; width:60px; height:50px; border:8px solid #6b4f3a; border-bottom:none; border-radius:30px 30px 0 0;"></div>
+
+    <div id="sweat1" style="position:absolute; left:420px; top:700px; width:24px; height:30px;">
+      <div class="clay" style="width:100%; height:100%; background:#7fa6b8; border-radius:50% 50% 50% 0; transform:rotate(-45deg);"></div>
+    </div>
+    <div id="sweat2" style="position:absolute; left:280px; top:720px; width:20px; height:26px;">
+      <div class="clay" style="width:100%; height:100%; background:#7fa6b8; border-radius:50% 50% 50% 0; transform:rotate(-45deg);"></div>
+    </div>
+
+    <div class="caption" id="cap1">
+      <span>Air</span><span>harus</span><span>naik</span><span>setinggi</span><span>tanggul.</span><span>Tangan</span><span>ini</span><span>yang</span><span>angkat.</span>
+    </div>
   </div>
 
-  <!-- Adegan 2 (5-10 dtk): Sisi positif -->
-  <div id="s1" class="clip" data-start="5" data-duration="5" data-track-index="1">
-    <div class="scene s-positive"><div class="scene-inner">
-      <div class="title a-title t-positive">RAJIN MINUM AIR</div>
-      <div class="sub a-sub">2 liter sehari, rutin!</div>
-      <div class="lines">
-        <div class="line a-line"><span class="icon i-pos"></span>Badan tetap terhidrasi</div>
-        <div class="line a-line"><span class="icon i-pos"></span>Fokus dan pikiran segar</div>
-        <div class="line a-line"><span class="icon i-pos"></span>Kulit sehat, tidak lemas</div>
-      </div>
-      <div class="punch a-punch">AIR = BAHAN BAKAR TUBUH!</div>
-    </div></div>
+  <!-- ============ SCENE 2: SOLUSI GAGAL (9-18s) ============ -->
+  <div class="clip" data-start="9" data-duration="9" data-track-index="1" id="s2">
+    <div style="position:absolute; inset:0; background:#f5ead6;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1020px; height:260px; background:#c96f4a; border-radius:60px 60px 0 0;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1120px; height:160px; background:#7fa6b8;"></div>
+
+    <div style="position:absolute; left:320px; top:680px; width:160px; height:360px;">
+      <div class="clay" style="position:absolute; left:40px; top:0; width:80px; height:80px; background:#d9a441; border-radius:50%;"></div>
+      <div class="clay" style="position:absolute; left:20px; top:70px; width:120px; height:180px; background:#8a9b6e; border-radius:50px;"></div>
+      <div class="clay" style="position:absolute; left:20px; top:230px; width:34px; height:130px; background:#6b4f3a; border-radius:16px;"></div>
+      <div class="clay" style="position:absolute; left:106px; top:230px; width:34px; height:130px; background:#6b4f3a; border-radius:16px;"></div>
+      <div class="clay" style="position:absolute; left:-30px; top:60px; width:80px; height:28px; background:#8a9b6e; border-radius:14px; transform:rotate(-60deg); transform-origin:right center;"></div>
+      <div class="clay" style="position:absolute; left:110px; top:60px; width:80px; height:28px; background:#8a9b6e; border-radius:14px; transform:rotate(60deg); transform-origin:left center;"></div>
+    </div>
+
+    <div style="position:absolute; left:360px; top:400px; width:8px; height:280px; background:#6b4f3a; border-radius:4px;"></div>
+
+    <div id="ember2" class="clay" style="position:absolute; left:290px; top:360px; width:140px; height:100px; background:#6b4f3a; border-radius:24px; transform:rotate(-15deg);"></div>
+
+    <div id="drop1" style="position:absolute; left:270px; top:440px; width:20px; height:28px;">
+      <div style="width:100%; height:100%; background:#7fa6b8; border-radius:50%; box-shadow:0 6px 12px rgba(107,79,58,.2);"></div>
+    </div>
+    <div id="drop2" style="position:absolute; left:310px; top:470px; width:16px; height:22px;">
+      <div style="width:100%; height:100%; background:#7fa6b8; border-radius:50%; box-shadow:0 6px 12px rgba(107,79,58,.2);"></div>
+    </div>
+    <div id="drop3" style="position:absolute; left:260px; top:490px; width:18px; height:24px;">
+      <div style="width:100%; height:100%; background:#7fa6b8; border-radius:50%; box-shadow:0 6px 12px rgba(107,79,58,.2);"></div>
+    </div>
+
+    <div class="caption" id="cap2">
+      <span>Tali</span><span>dan</span><span>ember</span><span>besar.</span><span>Tarik</span><span>terus.</span><span>Tangan</span><span>lecet.</span><span>Air</span><span>tumpah.</span>
+    </div>
   </div>
 
-  <!-- Adegan 3 (10-15 dtk): Sisi negatif -->
-  <div id="s2" class="clip" data-start="10" data-duration="5" data-track-index="1">
-    <div class="scene s-negative"><div class="scene-inner">
-      <div class="title a-title t-negative">JARANG MINUM AIR</div>
-      <div class="sub a-sub">Minum cuma kalau haus</div>
-      <div class="lines">
-        <div class="line a-line"><span class="icon i-neg"></span>Kepala pusing dan berat</div>
-        <div class="line a-line"><span class="icon i-neg"></span>Gampang lelah dan ngantuk</div>
-        <div class="line a-line"><span class="icon i-neg"></span>Kulit kering, bibir pecah</div>
-      </div>
-      <div class="punch a-punch">KURANG AIR = TUBUH NGELUH!</div>
-    </div></div>
+  <!-- ============ SCENE 3: SHADUF DIPERKENALKAN (18-28s) ============ -->
+  <div class="clip" data-start="18" data-duration="10" data-track-index="1" id="s3">
+    <div style="position:absolute; inset:0; background:#f5ead6;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1020px; height:260px; background:#c96f4a; border-radius:60px 60px 0 0;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1120px; height:160px; background:#7fa6b8;"></div>
+
+    <div id="post3" class="clay" style="position:absolute; left:340px; top:400px; width:40px; height:620px; background:#6b4f3a; border-radius:18px;"></div>
+    <div id="pivot3" class="clay" style="position:absolute; left:335px; top:395px; width:50px; height:50px; background:#d9a441; border-radius:50%;"></div>
+    <div id="beam3" class="clay" style="position:absolute; left:110px; top:435px; width:500px; height:30px; background:#8a9b6e; border-radius:15px; transform-origin:250px 15px; transform:rotate(-15deg);"></div>
+    <div id="stone3" class="clay" style="position:absolute; left:79px; top:475px; width:80px; height:80px; background:#6b4f3a; border-radius:50% 50% 45% 55%;"></div>
+    <div id="rope3" style="position:absolute; left:598px; top:385px; width:6px; height:120px; background:#3e3026; border-radius:3px;"></div>
+    <div id="bucket3" class="clay" style="position:absolute; left:561px; top:500px; width:80px; height:70px; background:#c96f4a; border-radius:12px 12px 20px 20px;"></div>
+    <div id="water3" style="position:absolute; left:566px; top:508px; width:70px; height:20px; background:#7fa6b8; border-radius:8px;"></div>
+
+    <div class="caption" id="cap3">
+      <span>Desain</span><span>cerdik:</span><span>shaduf.</span><span>Tiang,</span><span>lengan,</span><span>batu</span><span>penyeimbang.</span><span>Satu</span><span>tarikan.</span>
+    </div>
   </div>
 
-  <!-- Adegan 4 (15-20 dtk): Bandingkan -->
-  <div id="s3" class="clip" data-start="15" data-duration="5" data-track-index="1">
-    <div class="scene s-compare"><div class="scene-inner">
-      <div class="title a-title">BANDINGKAN!</div>
-      <div class="lines">
-        <div class="line a-line"><span class="icon i-mid"></span>1 botol di meja vs lupa minum</div>
-        <div class="line a-line"><span class="icon i-mid"></span>Air gratis vs obat sakit kepala</div>
-      </div>
-      <div class="punch a-punch">Sehari 1 botol, badan berterima kasih!</div>
-    </div></div>
+  <!-- ============ SCENE 4: MASALAH BARU (28-37s) ============ -->
+  <div class="clip" data-start="28" data-duration="9" data-track-index="1" id="s4">
+    <div style="position:absolute; inset:0; background:#f5ead6;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1020px; height:260px; background:#c96f4a; border-radius:60px 60px 0 0;"></div>
+
+    <div class="clay" style="position:absolute; left:340px; top:400px; width:40px; height:620px; background:#6b4f3a; border-radius:18px;"></div>
+    <div class="clay" style="position:absolute; left:335px; top:395px; width:50px; height:50px; background:#d9a441; border-radius:50%;"></div>
+    <div class="clay" style="position:absolute; left:110px; top:435px; width:500px; height:30px; background:#8a9b6e; border-radius:15px; transform-origin:250px 15px; transform:rotate(-35deg);"></div>
+
+    <div class="clay" style="position:absolute; left:95px; top:533px; width:120px; height:120px; background:#6b4f3a; border-radius:50% 50% 45% 55%;"></div>
+    <div style="position:absolute; left:130px; top:570px; font-size:90px; font-weight:900; color:#c94a4a; z-index:5; line-height:1;">✗</div>
+
+    <div style="position:absolute; left:562px; top:307px; width:6px; height:80px; background:#3e3026; border-radius:3px;"></div>
+    <div class="clay" style="position:absolute; left:525px; top:387px; width:80px; height:70px; background:#c96f4a; border-radius:12px 12px 20px 20px; transform:rotate(-20deg);"></div>
+
+    <div class="drop4" style="position:absolute; left:520px; top:450px; width:20px; height:28px;">
+      <div style="width:100%; height:100%; background:#7fa6b8; border-radius:50%; box-shadow:0 6px 12px rgba(107,79,58,.2);"></div>
+    </div>
+    <div class="drop4" style="position:absolute; left:555px; top:470px; width:16px; height:22px;">
+      <div style="width:100%; height:100%; background:#7fa6b8; border-radius:50%; box-shadow:0 6px 12px rgba(107,79,58,.2);"></div>
+    </div>
+    <div class="drop4" style="position:absolute; left:510px; top:480px; width:18px; height:24px;">
+      <div style="width:100%; height:100%; background:#7fa6b8; border-radius:50%; box-shadow:0 6px 12px rgba(107,79,58,.2);"></div>
+    </div>
+
+    <div class="caption" id="cap4">
+      <span>Kalau</span><span>terlalu</span><span>berat,</span><span>lengan</span><span>terjun</span><span>cepat.</span><span>Air</span><span>tumpah.</span><span>Timbangan</span><span>harus</span><span>pas.</span>
+    </div>
   </div>
 
-  <!-- Adegan 5 (20-25 dtk): CTA -->
-  <div id="s4" class="clip" data-start="20" data-duration="5" data-track-index="1">
-    <div class="scene s-positive"><div class="scene-inner">
-      <div class="title a-title t-positive">TARUH BOTOL DI MEJAMU!</div>
-      <div class="sub a-sub">600 ml, isi ulang 2x, beres.</div>
-      <div class="lines">
-        <div class="line a-line"><span class="icon i-pos"></span>Taruh di meja kerja / belajar</div>
-        <div class="line a-line"><span class="icon i-pos"></span>Habiskan sebelum sore hari</div>
-      </div>
-    </div></div>
+  <!-- ============ SCENE 5: SOLUSI ELEGAN — TUAS (37-47s) ============ -->
+  <div class="clip" data-start="37" data-duration="10" data-track-index="1" id="s5">
+    <div style="position:absolute; inset:0; background:#f5ead6;"></div>
+
+    <div class="clay" style="position:absolute; left:310px; top:750px; width:60px; height:30px; background:#6b4f3a; border-radius:10px;"></div>
+    <div style="position:absolute; left:310px; top:690px; width:0; height:0; border-left:30px solid transparent; border-right:30px solid transparent; border-bottom:60px solid #d9a441; filter:drop-shadow(0 6px 10px rgba(107,79,58,.3));"></div>
+    <div class="clay" style="position:absolute; left:330px; top:680px; width:20px; height:20px; background:#c96f4a; border-radius:50%;"></div>
+
+    <div class="clay" style="position:absolute; left:100px; top:685px; width:520px; height:20px; background:#8a9b6e; border-radius:10px;"></div>
+
+    <div style="position:absolute; left:100px; top:650px; width:240px; text-align:center; font-size:22px; font-weight:900; color:#6b4f3a;">Lengan pendek</div>
+    <div style="position:absolute; left:340px; top:650px; width:280px; text-align:center; font-size:22px; font-weight:900; color:#6b4f3a;">Lengan panjang</div>
+
+    <div class="clay" style="position:absolute; left:80px; top:705px; width:80px; height:80px; background:#6b4f3a; border-radius:50% 50% 45% 55%;"></div>
+    <div style="position:absolute; left:124px; top:800px; width:8px; height:30px; background:#c96f4a; border-radius:4px;"></div>
+    <div style="position:absolute; left:110px; top:828px; width:0; height:0; border-left:18px solid transparent; border-right:18px solid transparent; border-top:22px solid #c96f4a;"></div>
+    <div style="position:absolute; left:60px; top:865px; width:120px; text-align:center; font-size:22px; font-weight:900; color:#c96f4a;">Batu</div>
+
+    <div class="clay" style="position:absolute; left:600px; top:705px; width:80px; height:70px; background:#c96f4a; border-radius:12px 12px 20px 20px;"></div>
+    <div style="position:absolute; left:636px; top:790px; width:8px; height:30px; background:#c96f4a; border-radius:4px;"></div>
+    <div style="position:absolute; left:622px; top:818px; width:0; height:0; border-left:18px solid transparent; border-right:18px solid transparent; border-top:22px solid #c96f4a;"></div>
+    <div style="position:absolute; left:570px; top:855px; width:140px; text-align:center; font-size:22px; font-weight:900; color:#c96f4a;">Beban air</div>
+
+    <div class="caption" id="cap5">
+      <span>Fisika</span><span>tuas.</span><span>Titik</span><span>poros.</span><span>Lengan</span><span>panjang,</span><span>lengan</span><span>pendek.</span><span>Beban</span><span>seimbang.</span>
+    </div>
   </div>
 
-  <!-- Adegan 6 (25-30 dtk): Penutup -->
-  <div id="s5" class="clip" data-start="25" data-duration="5" data-track-index="1">
-    <div class="scene s-neutral"><div class="scene-inner">
-      <div class="title a-title">Kamu tim yang mana?</div>
-      <div class="sub a-sub">Tulis di komentar + Follow</div>
-      <div class="sign a-punch">Pak Guru Digital</div>
-    </div></div>
+  <!-- ============ SCENE 6: PENINGKATAN (47-56s) ============ -->
+  <div class="clip" data-start="47" data-duration="9" data-track-index="1" id="s6">
+    <div style="position:absolute; inset:0; background:#f5ead6;"></div>
+
+    <div class="clay" style="position:absolute; left:180px; top:600px; width:360px; height:300px; background:#c96f4a; border-radius:40px 40px 80px 80px;"></div>
+    <div class="clay" style="position:absolute; left:160px; top:580px; width:400px; height:60px; background:#a85a3a; border-radius:30px;"></div>
+    <div style="position:absolute; left:200px; top:610px; width:320px; height:60px; background:#7fa6b8; border-radius:20px;"></div>
+
+    <div style="position:absolute; left:340px; top:400px; width:40px; height:200px; background:#3e3026; border-radius:20px;"></div>
+    <div style="position:absolute; left:340px; top:560px; width:60px; height:60px; border:10px solid #3e3026; border-top:none; border-radius:0 0 30px 30px;"></div>
+
+    <div style="position:absolute; left:20px; top:920px; width:680px; text-align:center; font-size:24px; font-weight:900; color:#6b4f3a;">Ember kulit, kait, tali</div>
+
+    <div class="caption" id="cap6">
+      <span>Detail:</span><span>tali</span><span>dan</span><span>kait.</span><span>Ember</span><span>kulit</span><span>tahan</span><span>air.</span><span>Penahan</span><span>lengan.</span>
+    </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <!-- ============ SCENE 7: FINISHING (56-64s) ============ -->
+  <div class="clip" data-start="56" data-duration="8" data-track-index="1" id="s7">
+    <div style="position:absolute; inset:0; background:#f5ead6;"></div>
+    <div class="clay" style="position:absolute; left:0; right:0; top:1020px; height:260px; background:#c96f4a; border-radius:60px 60px 0 0;"></div>
+
+    <div class="clay" style="position:absolute; left:340px; top:400px; width:40px; height:620px; background:#6b4f3a; border-radius:18px;"></div>
+    <div class="clay" style="position:absolute; left:335px; top:395px; width:50px; height:50px; background:#d9a441; border-radius:50%;"></div>
+    <div class="clay" style="position:absolute; left:110px; top:435px; width:500px; height:30px; background:#8a9b6e; border-radius:15px; transform-origin:250px 15px; transform:rotate(-12deg);"></div>
+    <div class="clay" style="position:absolute; left:79px; top:475px; width:80px; height:80px; background:#6b4f3a; border-radius:50% 50% 45% 55%;"></div>
+    <div style="position:absolute; left:598px; top:385px; width:6px; height:150px; background:#3e3026; border-radius:3px;"></div>
+    <div class="clay" style="position:absolute; left:561px; top:530px; width:80px; height:70px; background:#c96f4a; border-radius:12px 12px 20px 20px;"></div>
+
+    <div class="clay" style="position:absolute; left:420px; top:940px; width:120px; height:30px; background:#d9a441; border-radius:15px;"></div>
+    <div class="clay" style="position:absolute; left:520px; top:440px; width:80px; height:20px; background:#d9a441; border-radius:10px;"></div>
+
+    <div style="position:absolute; left:430px; top:910px; font-size:20px; font-weight:900; color:#6b4f3a;">Pijakan</div>
+    <div style="position:absolute; left:525px; top:410px; font-size:20px; font-weight:900; color:#6b4f3a;">Pegangan</div>
+
+    <div class="caption" id="cap7">
+      <span>Finishing:</span><span>pijakan,</span><span>pegangan,</span><span>poros</span><span>dilumasi.</span><span>Semua</span><span>dari</span><span>kayu,</span><span>tali,</span><span>batu.</span>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 8: PAYOFF (64-74s) ============ -->
+  <div class="clip" data-start="64" data-duration="10" data-track-index="1" id="s8">
+    <div style="position:absolute; inset:0; background:#f5ead6;"></div>
+
+    <div id="sun8" class="clay" style="position:absolute; left:560px; top:130px; width:130px; height:130px; background:#d9a441; border-radius:50%;"></div>
+
+    <div class="clay" style="position:absolute; left:0; right:0; top:900px; height:380px; background:#8a9b6e; border-radius:60px 60px 0 0;"></div>
+    <div style="position:absolute; left:0; right:0; top:960px; height:80px; background:#7fa6b8;"></div>
+
+    <div class="plant" style="position:absolute; left:100px; top:800px; width:80px; height:130px; transform-origin:bottom center;">
+      <div class="clay" style="position:absolute; left:25px; top:50px; width:30px; height:80px; background:#6b8a4a; border-radius:15px;"></div>
+      <div class="clay" style="position:absolute; left:15px; top:0; width:50px; height:50px; background:#8a9b6e; border-radius:50%;"></div>
+    </div>
+    <div class="plant" style="position:absolute; left:250px; top:780px; width:80px; height:150px; transform-origin:bottom center;">
+      <div class="clay" style="position:absolute; left:25px; top:60px; width:30px; height:90px; background:#6b8a4a; border-radius:15px;"></div>
+      <div class="clay" style="position:absolute; left:15px; top:0; width:50px; height:50px; background:#8a9b6e; border-radius:50%;"></div>
+    </div>
+    <div class="plant" style="position:absolute; left:400px; top:790px; width:80px; height:140px; transform-origin:bottom center;">
+      <div class="clay" style="position:absolute; left:25px; top:55px; width:30px; height:85px; background:#6b8a4a; border-radius:15px;"></div>
+      <div class="clay" style="position:absolute; left:15px; top:0; width:50px; height:50px; background:#8a9b6e; border-radius:50%;"></div>
+    </div>
+    <div class="plant" style="position:absolute; left:550px; top:770px; width:80px; height:160px; transform-origin:bottom center;">
+      <div class="clay" style="position:absolute; left:25px; top:65px; width:30px; height:95px; background:#6b8a4a; border-radius:15px;"></div>
+      <div class="clay" style="position:absolute; left:15px; top:0; width:50px; height:50px; background:#8a9b6e; border-radius:50%;"></div>
+    </div>
+
+    <div class="caption" id="cap8">
+      <span>Satu</span><span>tarikan</span><span>ringan.</span><span>Air</span><span>mengalir</span><span>ke</span><span>sawah.</span><span>Panen</span><span>berlipat.</span>
+    </div>
+  </div>
+
+  <!-- ============ AUDIO ============ -->
+  <audio class="clip" data-start="0" data-duration="74" data-track-index="2" src="voiceover.mp3"></audio>
+
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <script>
-  window.__timelines = window.__timelines || {};
-  var tl = gsap.timeline({ paused: true });
-  for (var i = 0; i < 6; i++) {
-    (function (i) {
-      var t = i * 5, s = '#s' + i;
-      tl.from(s + ' .a-title', { opacity: 0, y: 50, duration: 0.7, ease: 'power2.out' }, t);
-      tl.from(s + ' .a-sub',   { opacity: 0, y: 30, duration: 0.6, ease: 'power2.out' }, t + 0.5);
-      tl.from(s + ' .a-line',  { opacity: 0, x: -40, duration: 0.5, stagger: 0.45, ease: 'power2.out' }, t + 1.0);
-      tl.from(s + ' .a-punch', { opacity: 0, scale: 0.92, duration: 0.6, ease: 'back.out(1.5)' }, t + 3.4);
-      tl.to(s + ' .scene-inner', { opacity: 0, duration: 0.5, ease: 'power1.in' }, t + 4.5);
-    })(i);
-  }
-  window.__timelines['main'] = tl;
+var tl = gsap.timeline({ paused: true });
+window.__timelines['main'] = tl;
+
+/* ===== SCENE 1: HOOK (0-9s) ===== */
+tl.to('#cap1 span', { opacity: 1, duration: 0.3, stagger: 0.5, ease: 'power2.out' }, 0.3);
+tl.to('#farmer', { y: 12, duration: 4.3, ease: 'sine.inOut' }, 0);
+tl.to('#farmer', { y: 0, duration: 4.2, ease: 'sine.inOut' }, 4.3);
+tl.to('#sweat1', { y: 60, opacity: 0, duration: 2, ease: 'power1.in' }, 1.5);
+tl.to('#sweat2', { y: 60, opacity: 0, duration: 2, ease: 'power1.in' }, 3.5);
+tl.to('#s1', { opacity: 0, duration: 0.5, ease: 'power1.in' }, 8.5);
+
+/* ===== SCENE 2: SOLUSI GAGAL (9-18s) ===== */
+tl.to('#cap2 span', { opacity: 1, duration: 0.3, stagger: 0.5, ease: 'power2.out' }, 9.3);
+tl.to('#ember2', { x: 25, duration: 1.2, ease: 'sine.inOut' }, 9.5);
+tl.to('#ember2', { x: -25, duration: 1.2, ease: 'sine.inOut' }, 10.7);
+tl.to('#ember2', { x: 20, duration: 1.2, ease: 'sine.inOut' }, 11.9);
+tl.to('#ember2', { x: -20, duration: 1.2, ease: 'sine.inOut' }, 13.1);
+tl.to('#ember2', { x: 0, duration: 1.2, ease: 'sine.inOut' }, 14.3);
+tl.to('#drop1', { y: 200, opacity: 0, duration: 1.5, ease: 'power1.in' }, 10);
+tl.to('#drop2', { y: 220, opacity: 0, duration: 1.5, ease: 'power1.in' }, 11.5);
+tl.to('#drop3', { y: 240, opacity: 0, duration: 1.5, ease: 'power1.in' }, 13);
+tl.to('#s2', { opacity: 0, duration: 0.5, ease: 'power1.in' }, 17.5);
+
+/* ===== SCENE 3: SHADUF INTRO (18-28s) ===== */
+tl.fromTo('#post3', { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 18.2);
+tl.fromTo('#pivot3', { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, 18.8);
+tl.fromTo('#beam3', { opacity: 0 }, { opacity: 1, duration: 0.6 }, 19.2);
+tl.fromTo('#stone3', { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'bounce.out' }, 19.6);
+tl.fromTo('#rope3', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 20.2);
+tl.fromTo('#bucket3', { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 20.5);
+tl.fromTo('#water3', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 21);
+tl.to('#cap3 span', { opacity: 1, duration: 0.3, stagger: 0.55, ease: 'power2.out' }, 19);
+tl.to('#s3', { opacity: 0, duration: 0.5, ease: 'power1.in' }, 27.5);
+
+/* ===== SCENE 4: MASALAH BARU (28-37s) ===== */
+tl.to('#cap4 span', { opacity: 1, duration: 0.3, stagger: 0.45, ease: 'power2.out' }, 28.3);
+tl.to('.drop4', { y: 180, opacity: 0, duration: 1.5, stagger: 0.4, ease: 'power1.in' }, 29);
+tl.to('#s4', { opacity: 0, duration: 0.5, ease: 'power1.in' }, 36.5);
+
+/* ===== SCENE 5: TUAS (37-47s) ===== */
+tl.to('#cap5 span', { opacity: 1, duration: 0.3, stagger: 0.5, ease: 'power2.out' }, 37.3);
+tl.to('#s5', { opacity: 0, duration: 0.5, ease: 'power1.in' }, 46.5);
+
+/* ===== SCENE 6: DETAIL (47-56s) ===== */
+tl.to('#cap6 span', { opacity: 1, duration: 0.3, stagger: 0.5, ease: 'power2.out' }, 47.3);
+tl.to('#s6', { opacity: 0, duration: 0.5, ease: 'power1.in' }, 55.5);
+
+/* ===== SCENE 7: FINISHING (56-64s) ===== */
+tl.to('#cap7 span', { opacity: 1, duration: 0.3, stagger: 0.5, ease: 'power2.out' }, 56.3);
+tl.to('#s7', { opacity: 0, duration: 0.5, ease: 'power1.in' }, 63.5);
+
+/* ===== SCENE 8: PAYOFF (64-74s) ===== */
+tl.to('#sun8', { opacity: 1, duration: 0.5 }, 64.5);
+tl.fromTo('#sun8', { scale: 0.3, transformOrigin: 'center center' }, { scale: 1, duration: 1, ease: 'back.out(2)' }, 64.5);
+tl.fromTo('.plant', { scaleY: 0, transformOrigin: 'bottom center' }, { scaleY: 1, duration: 1, stagger: 0.3, ease: 'back.out(1.7)' }, 65);
+tl.to('#cap8 span', { opacity: 1, duration: 0.3, stagger: 0.5, ease: 'power2.out' }, 64.3);
+tl.to('#s8', { opacity: 0, duration: 0.5, ease: 'power1.in' }, 73.5);
+
 </script>
 </body>
 </html>
