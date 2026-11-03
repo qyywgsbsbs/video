@@ -1,0 +1,32 @@
+name: Render Video
+on:
+  workflow_dispatch:
+
+jobs:
+  render-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install FFmpeg and Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libatspi2.0-0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2t64
+
+      - name: Render Video
+        env:
+          PRODUCER_FORCE_SCREENSHOT: "true"
+        run: |
+          npx -y hyperframes@latest render index.html -o hasil-video.mp4
+
+      - name: Upload Video
+        uses: actions/upload-artifact@v4
+        with:
+          name: Video-Hasil-Render
+          path: hasil-video.mp4
