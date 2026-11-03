@@ -22,7 +22,11 @@ jobs:
           sudo apt-get install -y -qq ffmpeg > /dev/null
 
       - name: Render video
-        run: npx -y hyperframes@latest render --composition index.html -o hasil-video.mp4 --fps 30
+        run: npx -y hyperframes@latest render --composition
+
+index.html -o
+
+hasil-video.mp4 --fps 30
 
       - name: Upload video
         uses: actions/upload-artifact@v4
