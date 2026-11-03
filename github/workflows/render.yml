@@ -6,7 +6,6 @@ on:
 jobs:
   render-video:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -16,19 +15,14 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg libgbm1 libnss3 libatk-bridge2.0-0
-
-      - name: Install chrome-headless-shell
-        run: npx puppeteer browsers install chrome-headless-shell
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - name: Render Video with HyperFrames
         run: |
           npx -y hyperframes render index.html -o hasil-video.mp4
 
-      - name: Upload Video
+      - name: Upload Video ke GitHub
         uses: actions/upload-artifact@v4
         with:
           name: Video-Hasil-Render
