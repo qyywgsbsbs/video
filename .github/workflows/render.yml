@@ -15,9 +15,9 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Render Video (Docker Mode)
+      - name: Render Video with Docker
         run: |
-          npx hyperframes render --docker --strict -o hasil-video.mp4
+          npx hyperframes render --docker --strict --output hasil-video.mp4
 
       - name: Upload Video
         uses: actions/upload-artifact@v4
